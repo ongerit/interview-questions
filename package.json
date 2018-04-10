@@ -1,0 +1,14 @@
+{
+  "name": "node-web-scrape",
+  "version": "0.0.1",
+  "description": "Scrape glassdoor developer",
+  "main": "server.js",
+  "author": "Thomas Ongeri",
+  "dependencies": {
+    "access-log": "^0.4.1",
+    "cheerio": "latest",
+    "express": "latest",
+    "http": "^0.0.0",
+    "request": "latest"
+  }
+}
