@@ -3,12 +3,9 @@ const fs = require('fs');
 const request = require('request');
 const cheerio = require('cheerio');
 const app     = express();
-const accesslog = require('access-log');
 
 app.get('/scrape', function(req, res){
-
   //const url ='https://www.careercup.com/page?pid=front-end-software-engineer-interview-questions'
-  //const url ='http://thomasongeri.com';
   const url ='https://www.glassdoor.com/Interview/developer-interview-questions-SRCH_KO0,9.htm'
 
   const options = {
@@ -42,29 +39,20 @@ app.get('/scrape', function(req, res){
         const logo = data.find('img').attr('data-original');
         const question = data.find('.questionText').text()
         const date = data.find('.cell .alignRt').text();
-
         const json = { logo : logo, question: question, date: date};
-        arr.push(json);
       })
-      console.log(arr);
-
-
     }
-
-
   })
+  // Using the fs library to create json file with data
+  // The file will be named questions.json
+  fs.writeFile('questions.json', JSON.stringify(json, null, 4),
+    (err)=> {
+      console.log('File successfully written! - Check /questions.json file');
+    }
+  }
 
-  res.send('check your console')
-  accesslog(req,res);
+  res.send('Check your console')
 })
-
 app.listen('8081')
-
-//http.createServer((req, res) => {
-// accesslog(req,res);
-// res.end();
-//}).listen(9000,'127.0.0.1');
-
 console.log('Open http://localhost:8081/scrape');
-
 exports = module.exports = app;
