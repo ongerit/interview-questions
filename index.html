@@ -1,0 +1,22 @@
+<!Doctype html>
+<html>
+<head>
+<title>Interview Questions</title>
+<script>
+document.addEventListener("DOMContentLoaded",()=> {
+  const APP = document.querySelector('.app')
+  fetch('//raw.githubusercontent.com/ongerit/interview-questions/master/sample.questions.json')
+    .then(d => d.json())
+    .then(d => {
+      var arr = [];
+      d.map( entry => {
+        arr.push(`<img src="${entry.logo}"><h3>date: ${entry.date}</h3> <p>question:${entry.question}</p>`);
+      })
+      APP.innerHTML = arr.join('')
+    });
+});
+</script>
+</head>
+<body class="app">
+</body>
+<html>
